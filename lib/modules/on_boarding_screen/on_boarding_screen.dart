@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../shared/components/components.dart';
-import '../../shared/styles/colors.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../../shared/components/components.dart';
+import '../../shared/styles/colors.dart';
 import '../login/login_screen.dart';
 
 class BoardingModel {
@@ -17,9 +17,8 @@ class BoardingModel {
   });
 }
 
-// ignore: must_be_immutable
 class OnBoardingScreen extends StatefulWidget {
-  OnBoardingScreen({Key? key}) : super(key: key);
+  const OnBoardingScreen({Key? key}) : super(key: key);
 
   @override
   State<OnBoardingScreen> createState() => _OnBoardingScreenState();

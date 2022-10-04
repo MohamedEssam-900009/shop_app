@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 Widget defaultButton({
   double width = double.infinity,
@@ -25,31 +26,35 @@ Widget defaultButton({
     );
 
 Widget defaultFormField({
-  required TextEditingController controller,
-  required TextInputType type,
-  Function(String)? onSubmitde,
-  Function(String)? onChange,
-  required String? Function(String?) validate,
-  required String label,
-  required IconData prefix,
+  required TextEditingController? controller,
+  required TextInputType? type,
+  Function(String?)? onSubmit,
+  Function(String?)? onChange,
+  VoidCallback? onTap,
+  String? Function(String?)? vaildate,
+  required String? lable,
+  required IconData? prefix,
   IconData? suffix,
-  VoidCallback? suffixPressed,
+  VoidCallback? suffixPressd,
   bool isPassword = false,
 }) =>
     TextFormField(
       controller: controller,
       keyboardType: type,
       obscureText: isPassword,
-      onFieldSubmitted: onSubmitde,
+      onFieldSubmitted: onSubmit,
       onChanged: onChange,
-      validator: validate,
+      onTap: onTap,
+      validator: vaildate,
       decoration: InputDecoration(
-        labelText: label,
+        labelText: lable,
         prefixIcon: Icon(prefix),
         suffixIcon: suffix != null
             ? IconButton(
-                icon: Icon(suffix),
-                onPressed: suffixPressed,
+                onPressed: suffixPressd,
+                icon: Icon(
+                  suffix,
+                ),
               )
             : null,
         border: const OutlineInputBorder(),
@@ -64,6 +69,39 @@ Widget defaultTextButton({
       onPressed: function,
       child: Text(text.toUpperCase()),
     );
+
+void showToast({required String message, required ToastState state}) {
+  Fluttertoast.showToast(
+    msg: message,
+    toastLength: Toast.LENGTH_LONG,
+    gravity: ToastGravity.BOTTOM,
+    timeInSecForIosWeb: 1,
+    backgroundColor: choseToastColor(state),
+    textColor: Colors.white,
+    fontSize: 16.0,
+  );
+}
+
+enum ToastState { success, error, warning }
+
+Color choseToastColor(ToastState state) {
+  Color color;
+  switch (state) {
+    case ToastState.success:
+      color = Colors.green;
+      break;
+
+    case ToastState.error:
+      color = Colors.red;
+      break;
+
+    case ToastState.warning:
+      color = Colors.yellow;
+      break;
+  }
+
+  return color;
+}
 
 void navigateTo(context, widget) => Navigator.push(
       context,

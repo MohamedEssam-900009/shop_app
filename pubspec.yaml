@@ -37,6 +37,7 @@ dependencies:
   hexcolor: 
   smooth_page_indicator: 
   conditional_builder_null_safety:
+  fluttertoast: 
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

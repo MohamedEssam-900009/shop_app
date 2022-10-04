@@ -1,14 +1,15 @@
-
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'appcubit_state.dart';
 
-import '../network/local/cashe_helper.dart';
-import 'app_state.dart';
+import '../network/local/cahch_helper.dart';
+
 
 class AppCubit extends Cubit<AppStates> {
-  AppCubit() : super(AppInitial());
+  AppCubit() : super(AppInitialState());
+
   static AppCubit get(context) => BlocProvider.of(context);
 
-  bool isDark = false;
+  bool isDark = true;
 
   void changeAppMode({bool? fromShared}) {
     if (fromShared != null) {
