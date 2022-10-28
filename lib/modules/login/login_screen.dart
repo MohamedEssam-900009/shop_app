@@ -27,8 +27,9 @@ class LoginScreen extends StatelessWidget {
           if (state is LoginSuccessState) {
             if (state.loginModel.status!) {
               showToast(
-                  message: state.loginModel.message!,
-                  state: ToastState.success);
+                message: state.loginModel.message!,
+                state: ToastState.success,
+              );
               token = state.loginModel.data!.token!;
               CacheHelper.saveData(
                       key: 'token', value: state.loginModel.data!.token)
@@ -38,7 +39,10 @@ class LoginScreen extends StatelessWidget {
             }
           } else if (state is LoginErrorState) {
             debugPrint(state.error);
-            showToast(message: state.error, state: ToastState.error);
+            showToast(
+              message: state.error,
+              state: ToastState.error,
+            );
           }
         },
         builder: (context, state) {
@@ -56,30 +60,35 @@ class LoginScreen extends StatelessWidget {
                         const Text(
                           'Login',
                           style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 40),
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 40,
+                          ),
                         ),
                         const SizedBox(
                           height: 10,
                         ),
                         const Text(
-                          "Login Now to browse our hot offers",
-                          style: TextStyle(color: Colors.grey, fontSize: 18),
+                          'Login Now to browse our hot offers',
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 18,
+                          ),
                         ),
                         const SizedBox(
                           height: 20,
                         ),
                         defaultFormField(
-                            controller: emailController,
-                            type: TextInputType.emailAddress,
-                            lable: 'Email Address',
-                            prefix: Icons.email_outlined,
-                            vaildate: (String? value) {
-                              if (value!.isEmpty) {
-                                return 'please Enter Your Email ';
-                              }
-                            }),
+                          controller: emailController,
+                          type: TextInputType.emailAddress,
+                          lable: 'Email Address',
+                          prefix: Icons.email_outlined,
+                          vaildate: (String? value) {
+                            if (value!.isEmpty) {
+                              return 'please Enter Your Email ';
+                            }
+                          },
+                        ),
                         const SizedBox(
                           height: 30,
                         ),
@@ -91,8 +100,9 @@ class LoginScreen extends StatelessWidget {
                           onSubmit: (value) {
                             if (formKey.currentState!.validate()) {
                               LoginCubit.get(context).userLogin(
-                                  email: emailController.text,
-                                  password: passwordController.text);
+                                email: emailController.text,
+                                password: passwordController.text,
+                              );
                             }
                           },
                           suffixPressd: () {
@@ -112,18 +122,21 @@ class LoginScreen extends StatelessWidget {
                         ConditionalBuilder(
                           condition: state is! LoginLoadingState,
                           builder: (context) => defaultButton(
-                              function: () {
-                                if (formKey.currentState!.validate()) {
-                                  LoginCubit.get(context).userLogin(
-                                      email: emailController.text,
-                                      password: passwordController.text);
-                                }
-                              },
-                              text: 'Login',
-                              isUpperCase: true,
-                              background: Colors.blue),
-                          fallback: (context) =>
-                              const Center(child: CircularProgressIndicator()),
+                            function: () {
+                              if (formKey.currentState!.validate()) {
+                                LoginCubit.get(context).userLogin(
+                                  email: emailController.text,
+                                  password: passwordController.text,
+                                );
+                              }
+                            },
+                            text: 'Login',
+                            isUpperCase: true,
+                            background: Colors.blue,
+                          ),
+                          fallback: (context) => const Center(
+                            child: CircularProgressIndicator(),
+                          ),
                         ),
                         const SizedBox(
                           height: 15,
@@ -133,7 +146,7 @@ class LoginScreen extends StatelessWidget {
                           children: [
                             const Text(
                               'Don\'t have an account ?',
-                              style: TextStyle(fontWeight: FontWeight.bold),
+                              style: TextStyle(),
                             ),
                             const SizedBox(
                               width: 10,
