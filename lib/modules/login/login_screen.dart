@@ -2,10 +2,8 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../layout/layout_screen.dart';
 import '../../shared/components/components.dart';
 import '../../shared/components/constants.dart';
-import '../../shared/network/local/cahch_helper.dart';
 import '../register/register_screen.dart';
 import 'cubit/cubit.dart';
 import 'cubit/states.dart';
@@ -31,11 +29,6 @@ class LoginScreen extends StatelessWidget {
                 state: ToastState.success,
               );
               token = state.loginModel.data!.token!;
-              CacheHelper.saveData(
-                      key: 'token', value: state.loginModel.data!.token)
-                  .then((value) {
-                navigateAndFinish(context, const LayoutScreen());
-              });
             }
           } else if (state is LoginErrorState) {
             debugPrint(state.error);

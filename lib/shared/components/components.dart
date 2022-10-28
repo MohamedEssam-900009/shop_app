@@ -75,7 +75,7 @@ void showToast({required String message, required ToastState state}) {
     msg: message,
     toastLength: Toast.LENGTH_LONG,
     gravity: ToastGravity.BOTTOM,
-    timeInSecForIosWeb: 1,
+    timeInSecForIosWeb: 5,
     backgroundColor: choseToastColor(state),
     textColor: Colors.white,
     fontSize: 16.0,
